@@ -1,0 +1,61 @@
+{
+  "name": "forgiven-promise",
+  "version": "0.0.1",
+  "description": "Forgiven extension for recording promises returned from setup steps",
+  "main": "lib/index.js",
+  "scripts": {
+    "cmd:lint": "eslint .",
+    "cmd:test": "cross-env NODE_ENV=test nyc mocha",
+    "cmd:coverage": "nyc report -r text && nyc check-coverage",
+    "cmd:build": "rimraf lib && babel src --out-dir lib",
+    "cmd:browser": "webpack",
+    "cmd:coveralls": "cat ./coverage/lcov.info | coveralls",
+    "test": "run-s cmd:lint cmd:test",
+    "build": "run-s test cmd:build cmd:browser",
+    "ci": "run-s build cmd:coveralls",
+    "alarmist:lint": "chokidar \"+(src|test)/**/*\" -c \"alarmist-npm cmd:lint\"",
+    "alarmist:test": "chokidar \"+(src|test)/**/*\" -c \"alarmist-npm cmd:test\"",
+    "alarmist:coverage": "chokidar \"coverage/lcov.info\" -c \"alarmist-npm cmd:coverage\"",
+    "alarmist:build": "chokidar \"src/**/*\" -c \"alarmist-npm cmd:build\"",
+    "alarmist:browser": "chokidar \"src/**/*\" \"index.js\" -c \"alarmist-npm cmd:browser\"",
+    "start": "alarmist-monitor run-p alarmist:lint alarmist:test alarmist:coverage alarmist:build alarmist:browser",
+    "watch": "chokidar '+(src|test)/**/*' -c 'npm run -s build'",
+    "prepublish": "run-s cmd:build cmd:browser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pghalliday/forgiven-promise.git"
+  },
+  "keywords": [],
+  "author": "Peter Halliday <pghalliday@gmail.com> (http://pghalliday.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pghalliday/forgiven-promise/issues"
+  },
+  "homepage": "https://github.com/pghalliday/forgiven-promise#readme",
+  "devDependencies": {
+    "alarmist": "^1.0.17",
+    "alarmist-npm": "^1.0.4",
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-istanbul": "^4.1.1",
+    "babel-preset-env": "^1.1.8",
+    "bower": "^1.8.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "chokidar-cli": "^1.2.0",
+    "coveralls": "^2.12.0",
+    "cross-conf-env": "^1.1.2",
+    "cross-env": "^3.2.4",
+    "eslint": "^3.14.1",
+    "eslint-config-google": "^0.7.1",
+    "forgiven": "0.0.7",
+    "forgiven-mocha": "0.0.3",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.1",
+    "nyc": "^10.1.2",
+    "rimraf": "^2.6.1",
+    "webpack": "^2.2.1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "forgiven-promise",
+  "description": "Forgiven extension for recording promises returned from setup steps",
+  "main": "browser.js",
+  "authors": [
+    "Peter Halliday <pghalliday@gmail.com> (http://pghalliday.com)"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/pghalliday/forgiven-promise",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+  }
+}
